@@ -7,12 +7,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class PopupActivity extends Activity {
 
-//    TextView txtText;
     EditText editStoreName, editDescription ;
+    Spinner category ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,25 +24,21 @@ public class PopupActivity extends Activity {
 
         editStoreName = (EditText)findViewById(R.id.et_name) ;
         editDescription = (EditText)findViewById(R.id.et_desc) ;
-
-//        //UI 객체생성
-//        txtText = (TextView)findViewById(R.id.txtText);
-//
-//        //데이터 가져오기
-//        Intent intent = getIntent();
-//        String data = intent.getStringExtra("data");
-//        txtText.setText(data);
+        category = (Spinner)findViewById(R.id.type_spinner) ;
     }
 
     //확인 버튼 클릭
     public void mOnClose(View v){
         String storeName = editStoreName.getText().toString() ;
         String storeDesc = editDescription.getText().toString() ;
+        String storeCategory = category.getSelectedItem().toString() ;
 
         //데이터 전달하기
         Intent intent = new Intent();
         intent.putExtra("name", storeName);
         intent.putExtra("description", storeDesc) ;
+        intent.putExtra("category", storeCategory) ;
+
         setResult(RESULT_OK, intent);
 
         //액티비티(팝업) 닫기
